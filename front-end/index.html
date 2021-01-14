@@ -1,2 +1,58 @@
-<h2>front-end ok</h2>
-<h1>lucianoortizsilva@gmail.com</h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Produtos</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+        <div>
+            <input name='id' type='hidden'/>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <input type="descricao" class="form-control" name="descricao">
+            </div>
+            <button class='btn btn-success' save>Save</button>
+        </div>
+        <table class="table" id='produtos'>
+            <thead>
+              <tr>
+                <th>Descrição</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="produtosRows">
+         </table>     
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        const API = 'http://localhost:3000'
+        
+        const getProdutos = () => {
+            $.ajax({
+                url: `${API}/produtos`,
+                success: produtos => {
+                    console.log(produtos)
+                }
+            })
+        }
+
+        const saveProdutos = () => {
+            const _id = $('[name=id]').val()
+            const descricao = $('[name=descricao]').val()
+            $.ajax({
+                method: _id ? 'PUT' : 'POST',
+                url: `${API}/produtos/${_id}`,
+                data: _id ? { _id, descricao } : { descricao },
+                success: getProdutos
+            })
+        }
+
+        $(() => {
+            getProdutos()
+            $('[save]').click(saveProdutos)
+        })
+    </script>
+  </body>
+</html>
