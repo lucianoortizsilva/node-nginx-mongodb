@@ -29,11 +29,43 @@
     <script>
         const API = 'http://localhost:3000'
         
+        const createButton = ( label, type) => {
+            return  $('<button>').addClass(`btn btn-${type}`).html(label)
+        }
+
+        const renderRows = produtos => {
+            const rows = produtos.map(p => {
+                const updateButton = createButton('Atualizar', 'warning')
+                updateButton.click(()=> loadProduto(p))
+                const removeButton = createButton('Excluir', 'danger')
+                removeButton.click(() => removeProdutos(p))
+                return $('<tr>')
+                    .append($('<td>').append(p.descricao))
+                    .append($('<td>').append(updateButton)
+                    .append(removeButton))
+            })
+            $('#produtosRows').html(rows)
+        }
+
+        const loadProduto = produto => {
+            $('[name=id]').val(produto._id)
+            $('[name=descricao]').val(produto.descricao)
+        }
+
+        const removeProdutos = produto => {
+            $.ajax({
+                method: 'DELETE',
+                url: `${API}/produtos/${produto._id}`,
+                success: getProdutos
+            })
+        }
+
         const getProdutos = () => {
             $.ajax({
                 url: `${API}/produtos`,
                 success: produtos => {
-                    console.log(produtos)
+                    renderRows(produtos)
+                    $('[name]').val('')
                 }
             })
         }
