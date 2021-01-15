@@ -21,7 +21,7 @@ docker-compose up
 ```
 
 ### Testando
-Se tudo deu certo, acesse no browser http://localhost:80, e teste o simples CRUD.
+Se tudo deu certo, acesse no browser http://localhost:80, e teste o simples CRUD, se comunicando entre diferentes containers.
 
 ![](https://github.com/lucianoortizsilva/node-nginx-mongodb/blob/main/front-end/github/localhost.png)
 
