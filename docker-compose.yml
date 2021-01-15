@@ -1,8 +1,10 @@
 version: '3'
 services: 
   db:
+    container_name: meuContainerDB
     image: mongo:3.4
   back-end:
+    container_name: meuContainerBackend
     image: node:8.1
     volumes: 
       - ./back-end:/back-end
@@ -10,6 +12,7 @@ services:
       - 3000:3000
     command: bash -c "cd /back-end && npm i && node app"      
   front-end:
+    container_name: meuContainerFrontend
     image: nginx:1.13
     volumes:
       - ./front-end:/usr/share/nginx/html/

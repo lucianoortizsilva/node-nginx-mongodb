@@ -25,3 +25,7 @@ docker-compose up
 Se tudo deu certo, acesse no browser http://localhost:80, e teste o simples CRUD.
 
 ![](https://github.com/lucianoortizsilva/node-nginx-mongodb/blob/main/front-end/github/localhost.png)
+
+### Visualizando meus containers Docker (Docker for windows app)
+
+![](https://github.com/lucianoortizsilva/node-nginx-mongodb/blob/main/front-end/github/containers.png)
